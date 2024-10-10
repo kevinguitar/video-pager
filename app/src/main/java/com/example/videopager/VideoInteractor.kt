@@ -1,6 +1,6 @@
 package com.example.videopager
 
-import android.view.TextureView
+import android.view.SurfaceView
 import android.view.View
 
 class VideoInteractor(
@@ -8,30 +8,30 @@ class VideoInteractor(
     private val index: Int,
 ) {
 
-    private var textureView: TextureView? = null
+    private var surfaceView: SurfaceView? = null
 
-    private val textureViewAttachListener = object : View.OnAttachStateChangeListener {
+    private val surfaceViewAttachListener = object : View.OnAttachStateChangeListener {
         override fun onViewAttachedToWindow(v: View) = Unit
-        override fun onViewDetachedFromWindow(v: View) = detachTextureView()
+        override fun onViewDetachedFromWindow(v: View) = detachSurfaceView()
     }
 
     val playbackTrigger = MutableEventFlow<Unit>()
 
-    fun play(textureView: TextureView) {
-        setTextureView(textureView)
+    fun play(surfaceView: SurfaceView) {
+        setSurfaceView(surfaceView)
         player.seekTo(index)
     }
 
-    private fun setTextureView(textureView: TextureView) {
-        textureView.removeOnAttachStateChangeListener(textureViewAttachListener)
-        textureView.addOnAttachStateChangeListener(textureViewAttachListener)
-        player.setTextureView(textureView)
-        this.textureView = textureView
+    private fun setSurfaceView(surfaceView: SurfaceView) {
+        surfaceView.removeOnAttachStateChangeListener(surfaceViewAttachListener)
+        surfaceView.addOnAttachStateChangeListener(surfaceViewAttachListener)
+        player.setSurfaceView(surfaceView)
+        this.surfaceView = surfaceView
     }
 
-    private fun detachTextureView() {
-        player.clearTextureView(textureView)
-        textureView?.removeOnAttachStateChangeListener(textureViewAttachListener)
-        textureView = null
+    private fun detachSurfaceView() {
+        player.clearSurfaceView(surfaceView)
+        surfaceView?.removeOnAttachStateChangeListener(surfaceViewAttachListener)
+        surfaceView = null
     }
 }

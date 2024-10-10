@@ -1,11 +1,10 @@
 package com.example.videopager
 
 import android.os.Bundle
-import android.view.TextureView
+import android.view.SurfaceView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.VerticalPager
@@ -73,10 +72,10 @@ fun VideoCard(
     modifier: Modifier,
 ) {
     val context = LocalContext.current
-    val textureView = remember { TextureView(context) }
+    val surfaceView = remember { SurfaceView(context) }
 
     AndroidView(
-        factory = { textureView },
+        factory = { surfaceView },
         modifier = modifier,
     )
 
@@ -84,7 +83,7 @@ fun VideoCard(
         videoInteractor.playbackTrigger
             .onEach {
                 if (it.consume() != null) {
-                    videoInteractor.play(textureView)
+                    videoInteractor.play(surfaceView)
                 }
             }
             .collect()

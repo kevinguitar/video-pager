@@ -2,7 +2,7 @@ package com.example.videopager
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.TextureView
+import android.view.SurfaceView
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -50,12 +50,12 @@ class VideoPlayer(context: Context) {
         exoPlayer.prepare()
     }
 
-    fun setTextureView(textureView: TextureView) {
-        exoPlayer.setVideoTextureView(textureView)
+    fun setSurfaceView(surfaceView: SurfaceView) {
+        exoPlayer.setVideoSurfaceView(surfaceView)
     }
 
-    fun clearTextureView(textureView: TextureView?) {
-        exoPlayer.clearVideoTextureView(textureView)
+    fun clearSurfaceView(surfaceView: SurfaceView?) {
+        exoPlayer.clearVideoSurfaceView(surfaceView)
     }
 
     fun seekTo(index: Int) {
